@@ -1,0 +1,90 @@
+﻿@model TheatreBooking.AppLayer.Seat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Seat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RowName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AreaDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AreaDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Information)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Information)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectedAt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
