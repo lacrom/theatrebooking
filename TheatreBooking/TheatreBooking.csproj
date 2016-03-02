@@ -223,6 +223,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="style.css" />
+    <Content Include="tipped.css" />
+    <Content Include="tipped.js" />
     <Content Include="ui-bootstrap-tpls-1.1.2.min.js" />
     <Content Include="underscore-min.js" />
     <None Include="Views\Seats\Plan.cshtml" />

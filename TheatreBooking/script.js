@@ -1,14 +1,10 @@
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
-
 angular.module('application', [])
 .controller('MainController', function ($scope, $http) {
 
     $scope.seats = [];
     $scope.mySelection = [];
 
-    $scope.getAllSeats = function () {
+	$scope.getAllSeats = function () {
         $http.get("http://localhost:4854/Seats/GetSeats")
         .then(function (result) {
             console.log(result.data);
@@ -76,6 +72,18 @@ angular.module('application', [])
                 });
         }
     }
+	
+	Tipped.create('.seat', function(element) {
+		var id = $(element).attr('id');
+		return {
+           content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p><p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>"
+      }
+    }, {
+		behavior: 'mouse'
+	}
+	);
+      //return "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p><p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>";
+    //});
 })
 
 
