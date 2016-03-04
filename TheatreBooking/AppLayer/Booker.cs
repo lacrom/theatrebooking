@@ -14,6 +14,10 @@ namespace TheatreBooking.AppLayer
         public string Email { get; set; }
         [DisplayName("Тел.")]
         public string PhoneNumber { get; set; }
+        [DisplayName("Приглашающее лицо")]
+        public string Face { get; set; }
+        [DisplayName("Фуршет")]
+        public bool? Party { get; set; }
     }
 
     public class BookerAndSeats
@@ -29,5 +33,9 @@ namespace TheatreBooking.AppLayer
         public string PhoneNumber { get; set; }
         [DisplayName("Места")]
         public List<string> Seats { get; set; }
+        [DisplayName("Приглашающее лицо")]
+        public string Face { get; set; }
+        [DisplayName("Фуршет")]
+        public bool? Party { get; set; }
     }
 }

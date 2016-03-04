@@ -3,6 +3,7 @@ angular.module('application', [])
 
     $scope.seats = [];
     $scope.mySelection = [];
+    $scope.showSuccess = false;
 
 	$scope.getAllSeats = function () {
         $http.get("/Seats/GetSeats")
@@ -61,12 +62,16 @@ angular.module('application', [])
         })
 
         if (ids !== undefined && ids.length > 0) {
-            $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber })
+            $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber, face: $scope.face, participation: $scope.participation })
                 .then(function (result) {
                     $scope.showSuccess = true;
                     console.log(result.data);
                     $scope.getAllSeats();
                     $scope.mySelection = [];
+
+                    //showsuccess
+                    $scope.broned = result.data;
+                    $('.jumbotron').removeClass('hidden');
                 }, function (error) {
                     console.log(error);
                 });

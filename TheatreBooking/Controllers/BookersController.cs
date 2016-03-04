@@ -74,11 +74,13 @@ namespace TheatreBooking.Controllers
             bookers.Columns.Add("Email", typeof(string));
             bookers.Columns.Add("Телефон", typeof(string));
             bookers.Columns.Add("Забронированные места", typeof(string));
+            bookers.Columns.Add("Приглашающее лицо", typeof(string));
+            bookers.Columns.Add("Фуршет", typeof(string));
 
             var bookerList = GetBookersAndSeats();
             bookerList.ForEach(b =>
             {
-                bookers.Rows.Add(b.LastName, b.FirstName, b.Email, b.PhoneNumber, String.Join(" ", b.Seats));
+                bookers.Rows.Add(b.LastName, b.FirstName, b.Email, b.PhoneNumber, String.Join(" ", b.Seats), b.Face, (b.Party ?? false) ? "Фуршет" : "");
             });
 
             var grid = new System.Web.UI.WebControls.GridView();
@@ -105,7 +107,9 @@ namespace TheatreBooking.Controllers
                 FirstName = b.FirstName,
                 LastName = b.LastName,
                 Email = b.Email,
-                PhoneNumber = b.PhoneNumber
+                PhoneNumber = b.PhoneNumber,
+                Face = b.Face,
+                Party = b.Party
             }).ToList();
 
             foreach (var booker in bookers)

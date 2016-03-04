@@ -191,7 +191,7 @@ namespace TheatreBooking.Controllers
         }
 
         [HttpPost]
-        public ActionResult Book(List<int> ids, string FirstName, string LastName, string Email, string PhoneNumber)
+        public ActionResult Book(List<int> ids, string FirstName, string LastName, string Email, string PhoneNumber, string face, bool? participation)
         {
             var seats = db.Seats.Where(s => ids.Contains(s.ID) && s.Status == SeatStatus.Selected).ToList();
 
@@ -202,7 +202,9 @@ namespace TheatreBooking.Controllers
                     FirstName = FirstName,
                     LastName = LastName,
                     Email = Email,
-                    PhoneNumber = PhoneNumber
+                    PhoneNumber = PhoneNumber,
+                    Face = face,
+                    Party = participation ?? false
                 };
 
                 booker = db.Bookers.Add(booker);

@@ -12,6 +12,7 @@
 </head>
 <body>
 <div ng-app="application" ng-controller="MainController">
+<div ng-hide="showSuccess">
     <div class="seat-container" style="top: 145px; left: 315px;"><div id="1" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[1].Status === 1, 'booked': seats[1].Status === 2, 'selected-by-me': mySelection[1] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[1].AreaDescription}}</p><p>{{seats[1].RowName}} {{seats[1].RowNumber}} Место {{seats[1].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 326px;"><div id="2" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[2].Status === 1, 'booked': seats[2].Status === 2, 'selected-by-me': mySelection[2] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[2].AreaDescription}}</p><p>{{seats[2].RowName}} {{seats[2].RowNumber}} Место {{seats[2].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 337px;"><div id="3" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[3].Status === 1, 'booked': seats[3].Status === 2, 'selected-by-me': mySelection[3] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[3].AreaDescription}}</p><p>{{seats[3].RowName}} {{seats[3].RowNumber}} Место {{seats[3].SeatNumber}}</p></div>" ></div></div>
@@ -2123,7 +2124,7 @@
 </div>
 <div class="scene" style="position: absolute; top: 30px; left: 300px; background-color: #d0d0d0; width: 385px; height:60px;"></div>
 <div class="input-area">
-        <form name="form" novalidate="">
+        <form name="form" novalidate>
             <div class="my-label">
                 <label for="firstName">Имя</label>
             </div>
@@ -2142,13 +2143,28 @@
                 <label for="Email">Email</label>
             </div>
             <div class="my-input">
-                <input id="Email" type="email" placeholder="Email" ng-model="email" name="email"/>
+                <input id="Email" type="text" placeholder="Email" ng-model="email" name="email"/>
             </div>
             <div class="my-label">
                 <label for="PhoneNumber">Телефон</label>
             </div>
             <div class="my-input">
                 <input id="PhoneNumber" type="tel" placeholder="Телефон" ng-model="phoneNumber" name="phone"/>
+            </div>
+            <div class="my-label">
+                <label for="face">Приглашающее лицо</label>
+            </div>
+            <div class="my-input " style="width: 220px;">
+                <select id="face" ng-model="face" class="form-control">
+					  <option value="">- Выберите -</option>
+					  <option value="Uralchem">Uralchem</option>
+					  <option value="Uralkali">Uralkali</option>
+					  <option value="Uralchem/Uralkali">Uralchem/Uralkali</option>
+					  <option value="IFA">IFA</option>
+				</select>
+            </div>
+			<div>
+               <input type="checkbox" ng-model="participation" style="width:15px; margin:0; padding:0; margin-top: 25px; margin-right: 10px;"/><span>Участие в фуршете</span>
             </div>
             <div>
                 <button class="book" ng-click="book()" ng-disabled="form.$invalid">
@@ -2165,6 +2181,14 @@
 			</div>
         </form>
     </div>
+	</div>
+	<div class="show-success jumbotron hidden" ng-show="showSuccess">
+		<h2>Поздравляем! Вы успешно забронировали места!</h2>
+		<br/><br/>
+		<p ng-repeat="seat in broned">
+			{{seat.AreaDescription}} {{seat.RowName}} {{seat.RowNumber}} Место {{seat.SeatNumber}} Цена: {{seat.Price}} руб.
+		</p>
+	</div>
 </div>
     <script src="/jquery-2.2.1.min.js"></script>
     <script src="/angular.min.js"></script>

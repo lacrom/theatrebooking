@@ -21,6 +21,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Seats)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Face)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Party)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +51,15 @@
                     @Html.DisplayFor(modelItem => seat)
                 </p>
             }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Face)
+        </td>
+        <td>
+            @{
+                var party = (item.Party ?? false) ? "Фуршет" : "";
+            }
+            @Html.DisplayFor(modelItem => party)
         </td>
         <td>
             @Html.ActionLink("Снять бронь", "Unbook", new { bookerID = item.ID })
