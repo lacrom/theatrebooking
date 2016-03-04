@@ -13,6 +13,7 @@ using WebGrease.Css.Extensions;
 
 namespace TheatreBooking.Controllers
 {
+    [Authorize]
     public class BookersController : Controller
     {
         private SeatContext db = new SeatContext();

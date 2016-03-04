@@ -5,7 +5,7 @@ angular.module('application', [])
     $scope.mySelection = [];
 
 	$scope.getAllSeats = function () {
-        $http.get("http://localhost:4854/Seats/GetSeats")
+        $http.get("/Seats/GetSeats")
         .then(function (result) {
             console.log(result.data);
 
@@ -32,7 +32,7 @@ angular.module('application', [])
 
             //send select request
             if (elemID !== undefined) {
-                $http.get("http://localhost:4854/Seats/Select?id=" + elemID)
+                $http.get("/Seats/Select?id=" + elemID)
                     .then(function (result) {
 
                         //add to mySelection if it was selected by me
@@ -61,7 +61,7 @@ angular.module('application', [])
         })
 
         if (ids !== undefined && ids.length > 0) {
-            $http.post("http://localhost:4854/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber })
+            $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber })
                 .then(function (result) {
                     $scope.showSuccess = true;
                     console.log(result.data);

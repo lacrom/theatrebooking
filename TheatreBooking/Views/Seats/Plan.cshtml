@@ -2130,14 +2130,14 @@
             <div class="my-input">
                 <input id="firstName" type="text" placeholder="Имя" ng-model="firstName" name="first" required/><span class="txt-danger star"> *</span>
             </div>
-            <p ng-show="form.first.$dirty && form.first.$invalid" class="txt-danger">* Поле является обязательным для заполнения</p>
+            <p ng-show="form.first.$dirty && form.first.$invalid" class="txt-danger" ng-cloak>* Поле является обязательным для заполнения</p>
             <div class="my-label">
                 <label for="lastName">Фамилия</label>
             </div>
             <div class="my-input">
                 <input id="lastName" type="text" placeholder="Фамилия" ng-model="lastName" name="last" required/><span class="txt-danger star"> *</span>
             </div>
-            <p ng-show="form.last.$dirty && form.last.$invalid" class="txt-danger">* Поле является обязательным для заполнения</p>
+            <p ng-show="form.last.$dirty && form.last.$invalid" class="txt-danger" ng-cloak>* Поле является обязательным для заполнения</p>
             <div class="my-label">
                 <label for="Email">Email</label>
             </div>
@@ -2155,7 +2155,7 @@
                     Забронировать
                 </button>
             </div>
-			<div style="margin-top:20px;">
+			<div style="margin-top:20px;" ng-cloak>
 				<div ng-show="mySelection.length > 0">
 					<strong>Вы выбрали:</strong>
 				</div>

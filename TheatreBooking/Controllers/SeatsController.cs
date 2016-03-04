@@ -19,6 +19,7 @@ namespace TheatreBooking.Controllers
         private System.Web.SessionState.HttpSessionState session = System.Web.HttpContext.Current.Session;
 
         // GET: Seats
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Seats.ToList());
@@ -50,6 +51,7 @@ namespace TheatreBooking.Controllers
             return Json(seats, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public void ExportBookedSeatsToExcel()
         {
             var seats = new System.Data.DataTable("bookers");
@@ -84,83 +86,84 @@ namespace TheatreBooking.Controllers
         }
 
         // GET: Seats/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Seat seat = db.Seats.Find(id);
-            if (seat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(seat);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Seat seat = db.Seats.Find(id);
+        //    if (seat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(seat);
+        //}
 
-        // GET: Seats/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Seats/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Seats/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RowName,RowNumber,SeatNumber,AreaDescription,Price,Information,Status,BookedAt,SelectedAt")] Seat seat)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Seats.Add(seat);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Seats/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,RowName,RowNumber,SeatNumber,AreaDescription,Price,Information,Status,BookedAt,SelectedAt")] Seat seat)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Seats.Add(seat);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(seat);
-        }
+        //    return View(seat);
+        //}
 
-        // GET: Seats/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Seat seat = db.Seats.Find(id);
-            if (seat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(seat);
-        }
+        //// GET: Seats/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Seat seat = db.Seats.Find(id);
+        //    if (seat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(seat);
+        //}
 
-        // POST: Seats/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RowName,RowNumber,SeatNumber,AreaDescription,Price,Information,Status")] Seat seat)
-        {
-            if (ModelState.IsValid)
-            {
-                if (seat.Status == SeatStatus.Booked)
-                {
-                    seat.BookedAt = DateTime.Now;
-                }
-                else
-                {
-                    seat.BookedAt = null;
-                }
+        //// POST: Seats/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,RowName,RowNumber,SeatNumber,AreaDescription,Price,Information,Status")] Seat seat)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (seat.Status == SeatStatus.Booked)
+        //        {
+        //            seat.BookedAt = DateTime.Now;
+        //        }
+        //        else
+        //        {
+        //            seat.BookedAt = null;
+        //        }
 
-                db.Entry(seat).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(seat);
-        }
+        //        db.Entry(seat).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(seat);
+        //}
 
+        [Authorize]
         public ActionResult Unbook(int? id)
         {
             var seat = db.Seats.FirstOrDefault(s => s.ID == id);
@@ -239,32 +242,34 @@ namespace TheatreBooking.Controllers
             return Json(seat, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Seats/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Seat seat = db.Seats.Find(id);
-            if (seat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(seat);
-        }
 
-        // POST: Seats/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Seat seat = db.Seats.Find(id);
-            db.Seats.Remove(seat);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// GET: Seats/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Seat seat = db.Seats.Find(id);
+        //    if (seat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(seat);
+        //}
 
+        //// POST: Seats/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Seat seat = db.Seats.Find(id);
+        //    db.Seats.Remove(seat);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+        [Authorize]
         public ActionResult Booked()
         {
             var bookedList = db.Seats.Where(seat => seat.Status == SeatStatus.Booked).ToList();

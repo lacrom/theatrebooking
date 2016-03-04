@@ -227,7 +227,7 @@
     <Content Include="tipped.js" />
     <Content Include="ui-bootstrap-tpls-1.1.2.min.js" />
     <Content Include="underscore-min.js" />
-    <None Include="Views\Seats\Plan.cshtml" />
+    <Content Include="Views\Seats\Plan.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
