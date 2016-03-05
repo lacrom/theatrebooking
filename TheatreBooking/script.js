@@ -16,7 +16,10 @@ angular.module('application', [])
                 $scope.seats[s.ID] = s;
             });
 
-        }, function (error) {
+            $("#loader").addClass("hidden");
+            $("#main").removeClass("hidden");
+
+            }, function (error) {
             console.log(error);
         })
     }
@@ -79,9 +82,14 @@ angular.module('application', [])
     }
 	
 	Tipped.create('.seat', function(element) {
-		var id = $(element).attr('id');
+	    var id = $(element).attr('id');
+	    var price = "";
+	    if ($scope.seats[id].Price != null) {
+	        price = "<p>Цена: " + $scope.seats[id].Price + " руб.</p>";
+	    }
 		return {
-           content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p><p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>"
+           content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p>" +
+               "<p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>" + price
       }
     }, {
 		behavior: 'mouse'

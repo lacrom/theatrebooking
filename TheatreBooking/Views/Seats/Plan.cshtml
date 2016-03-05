@@ -11,8 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="/tipped.css">
 </head>
 <body>
+<div id="loader" style="position: relative; left:400px; top: 300px; color: #bbbbbb; font-size: 16pt;">
+	<img src="/ajax-loader.gif"/> Идет загрузка...
+</div>
 <div ng-app="application" ng-controller="MainController">
-<div ng-hide="showSuccess">
+<div id="main" ng-hide="showSuccess" class="hidden">
     <div class="seat-container" style="top: 145px; left: 315px;"><div id="1" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[1].Status === 1, 'booked': seats[1].Status === 2, 'selected-by-me': mySelection[1] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[1].AreaDescription}}</p><p>{{seats[1].RowName}} {{seats[1].RowNumber}} Место {{seats[1].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 326px;"><div id="2" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[2].Status === 1, 'booked': seats[2].Status === 2, 'selected-by-me': mySelection[2] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[2].AreaDescription}}</p><p>{{seats[2].RowName}} {{seats[2].RowNumber}} Место {{seats[2].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 337px;"><div id="3" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[3].Status === 1, 'booked': seats[3].Status === 2, 'selected-by-me': mySelection[3] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[3].AreaDescription}}</p><p>{{seats[3].RowName}} {{seats[3].RowNumber}} Место {{seats[3].SeatNumber}}</p></div>" ></div></div>
