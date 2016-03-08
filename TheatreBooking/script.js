@@ -8,7 +8,7 @@ angular.module('application', [])
 	$scope.getAllSeats = function () {
         $http.get("/Seats/GetSeats")
         .then(function (result) {
-            console.log(result.data);
+            //console.log(result.data);
 
             //fillseats
             $scope.seats = [];
@@ -48,7 +48,7 @@ angular.module('application', [])
 
                         $scope.getAllSeats();
 
-                        console.log(result.data);
+                        //console.log(result.data);
                     }, function (error) {
                         console.log(error);
                     });
@@ -68,7 +68,7 @@ angular.module('application', [])
             $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber, face: $scope.face, participation: $scope.participation })
                 .then(function (result) {
                     $scope.showSuccess = true;
-                    console.log(result.data);
+                    //console.log(result.data);
                     $scope.getAllSeats();
                     $scope.mySelection = [];
 
@@ -84,12 +84,13 @@ angular.module('application', [])
 	Tipped.create('.seat', function(element) {
 	    var id = $(element).attr('id');
 	    var price = "";
+	    var information = "<p>" + $scope.seats[id].Information + "</p>";
 	    if ($scope.seats[id].Price != null) {
-	        price = "<p>Цена: " + $scope.seats[id].Price + " руб.</p>";
+	        price = "<div>Стоимость: <strong>" + $scope.seats[id].Price + "</strong> руб.</div>";
 	    }
 		return {
            content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p>" +
-               "<p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>" + price
+               "<div>" + $scope.seats[id].RowName + " <strong>" + $scope.seats[id].RowNumber + "</strong> Место <strong>" + $scope.seats[id].SeatNumber + "</strong></div>" + information + price
       }
     }, {
 		behavior: 'mouse'

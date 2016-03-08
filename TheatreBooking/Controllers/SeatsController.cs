@@ -10,12 +10,14 @@ using System.Web.Mvc;
 using TheatreBooking.AppLayer;
 using System.Web.SessionState;
 using System.Web.UI;
+using Microsoft.Ajax.Utilities;
 
 namespace TheatreBooking.Controllers
 {
     public class SeatsController : Controller
     {
         private SeatContext db = new SeatContext();
+        private EmailSender emailSender = new EmailSender();
         private System.Web.SessionState.HttpSessionState session = System.Web.HttpContext.Current.Session;
 
         // GET: Seats
@@ -218,6 +220,13 @@ namespace TheatreBooking.Controllers
 
                 db.SaveChanges();
 
+                if (!Email.IsNullOrWhiteSpace())
+                {
+                    var seatString = "";
+                    seats.ForEach(s => seatString = seatString + s.AreaDescription + " " + s.RowName + " " + s.RowNumber + " Место " + s.SeatNumber + " Стоимость: " + s.Price + "\r\n\r\n"); 
+                    emailSender.Send(Email, "Билеты в большой театр успешно забронированы", String.Format("Вы успешно забронировали билеты в большой театр:\r\n\r\n{0}", seatString));
+                }
+                
                 return Json(seats, JsonRequestBehavior.AllowGet);
             } 
 
