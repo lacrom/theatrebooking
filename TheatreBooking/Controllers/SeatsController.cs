@@ -37,7 +37,7 @@ namespace TheatreBooking.Controllers
             var seats = db.Seats.ToList();
 
             var expiredSeats = seats.Where(
-                s => (s.Status == SeatStatus.Selected) && (DateTime.Now.Subtract(TimeSpan.FromSeconds(300)) > s.SelectedAt))
+                s => (s.Status == SeatStatus.Selected) && (s.SelectedAt != null) && (DateTime.Now.Subtract(TimeSpan.FromSeconds(300)) > s.SelectedAt))
                 .ToList();
 
             expiredSeats.ForEach(s =>

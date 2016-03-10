@@ -1,8 +1,8 @@
 angular.module('application', [])
 .controller('MainController', function ($scope, $http) {
 
-    $scope.seats = [];
-    $scope.mySelection = [];
+    $scope.seats = {};
+    $scope.mySelection = {};
     $scope.showSuccess = false;
 
 	$scope.getAllSeats = function () {
@@ -34,11 +34,19 @@ angular.module('application', [])
         //if was selected by me or is available
         if ($scope.mySelection[elemID] !== undefined || currentSeat.Status === 0) {
 
-            $scope.mySelection[currentSeat.ID] = currentSeat.Status === 0 ? currentSeat : undefined;
+            var prevStatus = currentSeat.Status;
+
+            if (currentSeat.Status === 1) {
+                currentSeat.Status = 0;
+                delete $scope.mySelection[currentSeat.ID];
+            } else if (currentSeat.Status === 0) {
+                currentSeat.Status = 1;
+                $scope.mySelection[currentSeat.ID] = currentSeat;
+            }
 
             //send select request
             if (elemID !== undefined) {
-                $http.get("/Seats/Select?id=" + elemID + "&selected=" + currentSeat.Status)
+                $http.get("/Seats/Select?id=" + elemID + "&selected=" + prevStatus)
                     .then(function (result) {
 
                         if (result.data) {
@@ -46,19 +54,21 @@ angular.module('application', [])
                             if (result.data.Status === 1) {
                                 $scope.mySelection[result.data.ID] = result.data;
                             } else if (result.data.Status === 0) {
-                                $scope.mySelection[result.data.ID] = undefined;
+                                delete $scope.mySelection[result.data.ID];
                             }
                             $scope.seats[result.data.ID] = result.data;
                         } else {
-                            $scope.mySelection[currentSeat.ID] = undefined;
+                            delete $scope.mySelection[currentSeat.ID];
                         }
                         
-                        $scope.getAllSeats();
+                        //$scope.getAllSeats();
 
                         //console.log(result.data);
                     }, function (error) {
                         console.log(error);
                     });
+
+                
             };
         }
     }
@@ -74,14 +84,15 @@ angular.module('application', [])
         if (ids !== undefined && ids.length > 0) {
             $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber, face: $scope.face, participation: $scope.participation })
                 .then(function (result) {
-                    $scope.showSuccess = true;
-                    //console.log(result.data);
                     $scope.getAllSeats();
-                    $scope.mySelection = [];
-
-                    //showsuccess
-                    $scope.broned = result.data;
-                    $('.jumbotron').removeClass('hidden');
+                    $scope.mySelection = {};
+                    $scope.firstName = undefined;
+                    $scope.lastName = undefined;
+                    $scope.email = undefined;
+                    $scope.phoneNumber = undefined;
+                    $scope.face = undefined;
+                    $scope.participation = undefined;
+                    $scope.form.$setPristine();
                 }, function (error) {
                     console.log(error);
                 });
@@ -92,19 +103,28 @@ angular.module('application', [])
 	    var id = $(element).attr('id');
 	    var price = "<div>Бронь Большого Театра</div>";
 	    var information = "<p>" + $scope.seats[id].Information + "</p>";
+	    var bronfo = "";
 	    if ($scope.seats[id].Price != null) {
 	        price = "<div>Стоимость: <strong>" + $scope.seats[id].Price + "</strong> руб.</div>";
 	    }
-		return {
-           content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p>" +
-               "<div>" + $scope.seats[id].RowName + " <strong>" + $scope.seats[id].RowNumber + "</strong> Место <strong>" + $scope.seats[id].SeatNumber + "</strong></div>" + information + price
-      }
+	    if ($scope.seats[id].Status === 2) {
+	        bronfo = "<div>Забронировано: <strong>" + $scope.seats[id].BookedBy.FirstName + " " + $scope.seats[id].BookedBy.LastName + "</strong></div>";
+	    }
+	        return {
+	            content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p>" +
+	                "<div>" + $scope.seats[id].RowName + " <strong>" + $scope.seats[id].RowNumber + "</strong> Место <strong>" + $scope.seats[id].SeatNumber + "</strong></div>" + information + price + bronfo
+	    }
     }, {
-		behavior: 'mouse'
+        behavior: 'mouse',
+        cache: false
 	}
 	);
       //return "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p><p>" + $scope.seats[id].RowName + " " + $scope.seats[id].RowNumber + " Место " + $scope.seats[id].SeatNumber + "</p>";
     //});
+
+    $scope.isEmptyArray = function(arr) {
+        return _.isEmpty(arr);
+    }
 })
 
 

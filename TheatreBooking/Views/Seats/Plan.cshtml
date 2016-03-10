@@ -2122,8 +2122,7 @@
 	
 <div style="position: absolute; top: 750px; left: 50px;">
     <div class="seat"></div><span style="position: relative; bottom: 15px; left: 20px;"> Свободно</span>
-    <div class="seat selected-by-me"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано вами</span>
-    <div class="seat selected"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано другими пользователями</span>
+    <div class="seat selected-by-me"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано</span>
     <div class="seat booked"></div><span style="position: relative; bottom: 15px; left: 20px;"> Забронировано</span>
 </div>
 <div class="scene" style="position: absolute; top: 30px; left: 300px; background-color: #d0d0d0; width: 385px; height:60px;"></div>
@@ -2135,14 +2134,14 @@
             <div class="my-input">
                 <input id="firstName" type="text" placeholder="Имя" ng-model="firstName" name="first" required/><span class="txt-danger star"> *</span>
             </div>
-            <p ng-show="form.first.$dirty && form.first.$invalid" class="txt-danger" ng-cloak>* Поле является обязательным для заполнения</p>
+            <p ng-show="form.first.$dirty && form.first.$invalid" class="txt-danger" ng-cloak style="white-space: nowrap;">* Поле является обязательным для заполнения</p>
             <div class="my-label">
                 <label for="lastName">Фамилия</label>
             </div>
             <div class="my-input">
                 <input id="lastName" type="text" placeholder="Фамилия" ng-model="lastName" name="last" required/><span class="txt-danger star"> *</span>
             </div>
-            <p ng-show="form.last.$dirty && form.last.$invalid" class="txt-danger" ng-cloak>* Поле является обязательным для заполнения</p>
+            <p ng-show="form.last.$dirty && form.last.$invalid" class="txt-danger" ng-cloak style="white-space: nowrap;">* Поле является обязательным для заполнения</p>
             <div class="my-label">
                 <label for="Email">Email</label>
             </div>
@@ -2176,10 +2175,10 @@
                 </button>
             </div>
 			<div style="margin-top:20px;" ng-cloak>
-				<div ng-show="mySelection.length > 0">
+				<div ng-hide="isEmptyArray(mySelection)">
 					<strong>Вы выбрали:</strong>
 				</div>
-				<div ng-repeat="(id, seat) in mySelection | filter:{ ID: '! undefined' }" style="white-space: nowrap;">
+				<div ng-repeat="(id, seat) in mySelection" style="white-space: nowrap;">
 					{{seat.AreaDescription}} {{seat.RowName}} {{seat.RowNumber}} Место {{seat.SeatNumber}}
 				</div>
 			</div>

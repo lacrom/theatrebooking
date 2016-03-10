@@ -15,11 +15,11 @@
 }
 
 .seat.selected {
-    background-color: grey;
+    background-color: #483C32;
 }
 
 .seat.booked {
-    background-color: #483C32;
+    background-color: #008000;
 }
 
 .seat:hover {
