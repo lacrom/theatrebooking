@@ -6,23 +6,23 @@ angular.module('application', [])
     $scope.showSuccess = false;
 
 	$scope.getAllSeats = function () {
-        $http.get("/Seats/GetSeats")
-        .then(function (result) {
-            //console.log(result.data);
+	    $http.get("/Seats/GetSeats")
+	        .then(function(result) {
+	            //console.log(result.data);
 
-            //fillseats
-            $scope.seats = [];
-            _(result.data).each(function (s) {
-                $scope.seats[s.ID] = s;
-            });
+	            //fillseats
+	            $scope.seats = [];
+	            _(result.data).each(function(s) {
+	                $scope.seats[s.ID] = s;
+	            });
 
-            $("#loader").addClass("hidden");
-            $("#main").removeClass("hidden");
+	            $("#loader").addClass("hidden");
+	            $("#main").removeClass("hidden");
 
-            }, function (error) {
-            console.log(error);
-        })
-    }
+	        }, function(error) {
+	            console.log(error);
+	        });
+	}
 
     $scope.getAllSeats();
 
@@ -34,18 +34,25 @@ angular.module('application', [])
         //if was selected by me or is available
         if ($scope.mySelection[elemID] !== undefined || currentSeat.Status === 0) {
 
+            $scope.mySelection[currentSeat.ID] = currentSeat.Status === 0 ? currentSeat : undefined;
+
             //send select request
             if (elemID !== undefined) {
-                $http.get("/Seats/Select?id=" + elemID)
+                $http.get("/Seats/Select?id=" + elemID + "&selected=" + currentSeat.Status)
                     .then(function (result) {
 
-                        //add to mySelection if it was selected by me
-                        if (currentSeat.Status === 0 && result.data.Status === 1) {
-                            $scope.mySelection[result.data.ID] = result.data;
-                        } else if (currentSeat.Status === 1 && result.data.Status === 0) {
-                            $scope.mySelection[result.data.ID] = undefined;
+                        if (result.data) {
+                            //add to mySelection if it was selected by me
+                            if (result.data.Status === 1) {
+                                $scope.mySelection[result.data.ID] = result.data;
+                            } else if (result.data.Status === 0) {
+                                $scope.mySelection[result.data.ID] = undefined;
+                            }
+                            $scope.seats[result.data.ID] = result.data;
+                        } else {
+                            $scope.mySelection[currentSeat.ID] = undefined;
                         }
-
+                        
                         $scope.getAllSeats();
 
                         //console.log(result.data);
@@ -58,11 +65,11 @@ angular.module('application', [])
 
     $scope.book = function () {
 
-        var ids = _($scope.mySelection).filter(function (s) {
+        var ids = _($scope.mySelection).filter(function(s) {
             return s !== undefined
-        }).map(function (s) {
-            return s.ID
-        })
+        }).map(function(s) {
+            return s.ID;
+        });
 
         if (ids !== undefined && ids.length > 0) {
             $http.post("/Seats/Book", { ids: ids, FirstName: $scope.firstName, LastName: $scope.lastName, Email: $scope.email, PhoneNumber: $scope.phoneNumber, face: $scope.face, participation: $scope.participation })
@@ -83,7 +90,7 @@ angular.module('application', [])
 	
 	Tipped.create('.seat', function(element) {
 	    var id = $(element).attr('id');
-	    var price = "";
+	    var price = "<div>Бронь Большого Театра</div>";
 	    var information = "<p>" + $scope.seats[id].Information + "</p>";
 	    if ($scope.seats[id].Price != null) {
 	        price = "<div>Стоимость: <strong>" + $scope.seats[id].Price + "</strong> руб.</div>";

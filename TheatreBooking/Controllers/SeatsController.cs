@@ -233,19 +233,23 @@ namespace TheatreBooking.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
         }
 
-        public ActionResult Select(int id)
+        public ActionResult Select(int id, SeatStatus selected)
         {
             var seat = db.Seats.First(s => s.ID == id);
 
-            if (seat.Status == SeatStatus.Available)
+            if (seat.Status == SeatStatus.Available && selected == SeatStatus.Available)
             {
                 seat.Status = SeatStatus.Selected;
                 seat.SelectedAt = DateTime.Now;
             }
-            else if (seat.Status == SeatStatus.Selected)
+            else if (seat.Status == SeatStatus.Selected && selected == SeatStatus.Selected)
             {
                 seat.Status = SeatStatus.Available;
                 seat.SelectedAt = null;
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
 
             db.SaveChanges();

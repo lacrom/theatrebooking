@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>
-        Схема большого театра
+        Бронирование билетов
     </title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css">
@@ -16,7 +16,7 @@
 </div>
 <div ng-app="application" ng-controller="MainController">
 <div id="main" ng-hide="showSuccess" class="hidden" style="position:relative; top:0px;">
-	<h1 style="position:relative; bottom:40px; left:290px;">Бронь Большого Театра</h1>
+	<h1 style="position:relative; bottom:40px; left:315px;">Историческая сцена</h1>
     <div class="seat-container" style="top: 145px; left: 315px;"><div id="1" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[1].Status === 1, 'booked': seats[1].Status === 2, 'selected-by-me': mySelection[1] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[1].AreaDescription}}</p><p>{{seats[1].RowName}} {{seats[1].RowNumber}} Место {{seats[1].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 326px;"><div id="2" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[2].Status === 1, 'booked': seats[2].Status === 2, 'selected-by-me': mySelection[2] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[2].AreaDescription}}</p><p>{{seats[2].RowName}} {{seats[2].RowNumber}} Место {{seats[2].SeatNumber}}</p></div>" ></div></div>
     <div class="seat-container" style="top: 145px; left: 337px;"><div id="3" class="seat" ng-click="seatSelected($event)" ng-class="{ 'selected': seats[3].Status === 1, 'booked': seats[3].Status === 2, 'selected-by-me': mySelection[3] }" data-toggle="popover" data-delay="200" data-html="true" data-trigger="hover" data-placement="top" data-content="<div><p class='tooltip-header'>{{seats[3].AreaDescription}}</p><p>{{seats[3].RowName}} {{seats[3].RowNumber}} Место {{seats[3].SeatNumber}}</p></div>" ></div></div>
@@ -2123,7 +2123,7 @@
 <div style="position: absolute; top: 750px; left: 50px;">
     <div class="seat"></div><span style="position: relative; bottom: 15px; left: 20px;"> Свободно</span>
     <div class="seat selected-by-me"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано вами</span>
-    <div class="seat selected"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано другими</span>
+    <div class="seat selected"></div><span style="position: relative; bottom: 15px; left: 20px;"> Выбрано другими пользователями</span>
     <div class="seat booked"></div><span style="position: relative; bottom: 15px; left: 20px;"> Забронировано</span>
 </div>
 <div class="scene" style="position: absolute; top: 30px; left: 300px; background-color: #d0d0d0; width: 385px; height:60px;"></div>
@@ -2179,7 +2179,7 @@
 				<div ng-show="mySelection.length > 0">
 					<strong>Вы выбрали:</strong>
 				</div>
-				<div ng-repeat="(id, seat) in mySelection | filter:{ ID: '! undefined' }" >
+				<div ng-repeat="(id, seat) in mySelection | filter:{ ID: '! undefined' }" style="white-space: nowrap;">
 					{{seat.AreaDescription}} {{seat.RowName}} {{seat.RowNumber}} Место {{seat.SeatNumber}}
 				</div>
 			</div>
