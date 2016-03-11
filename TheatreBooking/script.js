@@ -109,6 +109,9 @@ angular.module('application', [])
 	    }
 	    if ($scope.seats[id].Status === 2) {
 	        bronfo = "<div>Забронировано: <strong>" + $scope.seats[id].BookedBy.FirstName + " " + $scope.seats[id].BookedBy.LastName + "</strong></div>";
+	        if ($scope.seats[id].BookedBy.Face) {
+	            bronfo = bronfo + "<div><strong>" + $scope.seats[id].BookedBy.Face + "</strong></div>";
+	        }
 	    }
 	        return {
 	            content: "<p class='tooltip-header'>" + $scope.seats[id].AreaDescription + "</p>" +
