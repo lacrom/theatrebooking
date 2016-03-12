@@ -18,7 +18,7 @@ namespace TheatreBooking.Controllers
         private SeatContext db = new SeatContext();
 
         // GET: Bookers
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var bookers = db.Bookers.ToList();
@@ -26,7 +26,7 @@ namespace TheatreBooking.Controllers
             return View(bookers);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult BookerAndSeats()
         {
             var bookers = GetBookersAndSeats();
@@ -34,6 +34,7 @@ namespace TheatreBooking.Controllers
             return View(bookers);
         }
 
+        [Authorize(Roles = "admin,spectator")]
         public ActionResult BookerAndSeatsRestricted()
         {
             var bookers = GetBookersAndSeats();
@@ -41,7 +42,7 @@ namespace TheatreBooking.Controllers
             return View(bookers);
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Unbook(int? bookerID)
         {
             if (bookerID != null)
@@ -75,6 +76,7 @@ namespace TheatreBooking.Controllers
             return RedirectToAction("BookerAndSeats");
         }
 
+        [Authorize(Roles = "admin,spectator")]
         public void ExportBookersToExcel()
         {
             var bookers = new System.Data.DataTable("bookers");
@@ -108,6 +110,7 @@ namespace TheatreBooking.Controllers
             Response.End();
         }
 
+        [Authorize(Roles = "admin,spectator")]
         private IList<BookerAndSeats> GetBookersAndSeats()
         {
             var bookers = db.Bookers.Select(b => new BookerAndSeats()

@@ -21,23 +21,25 @@ namespace TheatreBooking.Controllers
         private System.Web.SessionState.HttpSessionState session = System.Web.HttpContext.Current.Session;
 
         // GET: Seats
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.Seats.ToList());
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Plan()
         {
             return View();
         }
 
+        [Authorize(Roles = "spectator,admin")]
         public ActionResult PlanRestricted()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin,spectator")]
         public ActionResult GetSeats()
         {
             var seats = db.Seats.ToList();
@@ -59,6 +61,7 @@ namespace TheatreBooking.Controllers
             return Json(seats, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "admin,spectator")]
         public void ExportBookedSeatsToExcel()
         {
             var seats = new System.Data.DataTable("bookers");
@@ -170,7 +173,7 @@ namespace TheatreBooking.Controllers
         //    return View(seat);
         //}
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Unbook(int? id)
         {
             var seat = db.Seats.FirstOrDefault(s => s.ID == id);
@@ -197,7 +200,7 @@ namespace TheatreBooking.Controllers
             return RedirectToAction("Booked");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Book(List<int> ids, string FirstName, string LastName, string Email, string PhoneNumber, string face, bool? participation)
         {
@@ -239,7 +242,7 @@ namespace TheatreBooking.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Select(int id, SeatStatus selected)
         {
             var seat = db.Seats.First(s => s.ID == id);
@@ -291,7 +294,7 @@ namespace TheatreBooking.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public ActionResult Booked()
         {
             var bookedList = db.Seats.Where(seat => seat.Status == SeatStatus.Booked).ToList();
@@ -299,6 +302,7 @@ namespace TheatreBooking.Controllers
             return View(bookedList);
         }
 
+        [Authorize(Roles = "admin,spectator")]
         public ActionResult BookedRestricted()
         {
             var bookedList = db.Seats.Where(seat => seat.Status == SeatStatus.Booked).ToList();
