@@ -13,12 +13,12 @@ using WebGrease.Css.Extensions;
 
 namespace TheatreBooking.Controllers
 {
-    [Authorize]
     public class BookersController : Controller
     {
         private SeatContext db = new SeatContext();
 
         // GET: Bookers
+        [Authorize]
         public ActionResult Index()
         {
             var bookers = db.Bookers.ToList();
@@ -26,6 +26,7 @@ namespace TheatreBooking.Controllers
             return View(bookers);
         }
 
+        [Authorize]
         public ActionResult BookerAndSeats()
         {
             var bookers = GetBookersAndSeats();
@@ -33,6 +34,14 @@ namespace TheatreBooking.Controllers
             return View(bookers);
         }
 
+        public ActionResult BookerAndSeatsRestricted()
+        {
+            var bookers = GetBookersAndSeats();
+
+            return View(bookers);
+        }
+
+        [Authorize]
         public ActionResult Unbook(int? bookerID)
         {
             if (bookerID != null)

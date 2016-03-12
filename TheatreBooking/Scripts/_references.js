@@ -4,6 +4,7 @@
 /// <reference path="../js/bootstrap.js" />
 /// <reference path="../js/npm.js" />
 /// <reference path="../script.js" />
+/// <reference path="../scriptrestricted.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />

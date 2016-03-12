@@ -27,7 +27,13 @@ namespace TheatreBooking.Controllers
             return View(db.Seats.ToList());
         }
 
+        [Authorize]
         public ActionResult Plan()
+        {
+            return View();
+        }
+
+        public ActionResult PlanRestricted()
         {
             return View();
         }
@@ -53,7 +59,6 @@ namespace TheatreBooking.Controllers
             return Json(seats, JsonRequestBehavior.AllowGet);
         }
 
-        [Authorize]
         public void ExportBookedSeatsToExcel()
         {
             var seats = new System.Data.DataTable("bookers");
@@ -192,6 +197,7 @@ namespace TheatreBooking.Controllers
             return RedirectToAction("Booked");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Book(List<int> ids, string FirstName, string LastName, string Email, string PhoneNumber, string face, bool? participation)
         {
@@ -233,6 +239,7 @@ namespace TheatreBooking.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
         }
 
+        [Authorize]
         public ActionResult Select(int id, SeatStatus selected)
         {
             var seat = db.Seats.First(s => s.ID == id);
@@ -286,6 +293,13 @@ namespace TheatreBooking.Controllers
 
         [Authorize]
         public ActionResult Booked()
+        {
+            var bookedList = db.Seats.Where(seat => seat.Status == SeatStatus.Booked).ToList();
+
+            return View(bookedList);
+        }
+
+        public ActionResult BookedRestricted()
         {
             var bookedList = db.Seats.Where(seat => seat.Status == SeatStatus.Booked).ToList();
 

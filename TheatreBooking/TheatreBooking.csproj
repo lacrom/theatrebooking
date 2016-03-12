@@ -217,6 +217,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\npm.js" />
     <Content Include="plan.html" />
+    <Content Include="scriptrestricted.js" />
     <Content Include="script.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -291,6 +292,9 @@
     <Content Include="Views\Bookers\Index.cshtml" />
     <Content Include="Views\Seats\Booked.cshtml" />
     <Content Include="Views\Bookers\BookerAndSeats.cshtml" />
+    <Content Include="Views\Seats\BookedRestricted.cshtml" />
+    <Content Include="Views\Seats\PlanRestricted.cshtml" />
+    <Content Include="Views\Bookers\BookerAndSeatsRestricted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
