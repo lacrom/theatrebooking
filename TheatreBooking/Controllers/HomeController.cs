@@ -13,6 +13,11 @@ namespace TheatreBooking.Controllers
             return View();
         }
 
+        public ActionResult IndexEn()
+        {
+            return View();
+        }
+
         //public ActionResult About()
         //{
         //    ViewBag.Message = "Your application description page.";

@@ -177,9 +177,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookersEnController.cs" />
     <Compile Include="Controllers\BookersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SeatsEnController.cs" />
     <Compile Include="Controllers\SeatsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +193,10 @@
     <Compile Include="Migrations\201603041914146_added face and party.cs" />
     <Compile Include="Migrations\201603041914146_added face and party.Designer.cs">
       <DependentUpon>201603041914146_added face and party.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604301737317_English.cs" />
+    <Compile Include="Migrations\201604301737317_English.Designer.cs">
+      <DependentUpon>201604301737317_English.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -217,6 +223,8 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\npm.js" />
     <Content Include="plan.html" />
+    <Content Include="scriptEn.js" />
+    <Content Include="scriptrestrictedEn.js" />
     <Content Include="scriptrestricted.js" />
     <Content Include="script.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -295,6 +303,23 @@
     <Content Include="Views\Seats\BookedRestricted.cshtml" />
     <Content Include="Views\Seats\PlanRestricted.cshtml" />
     <Content Include="Views\Bookers\BookerAndSeatsRestricted.cshtml" />
+    <Content Include="Views\BookersEn\BookerAndSeats.cshtml" />
+    <Content Include="Views\BookersEn\BookerAndSeatsRestricted.cshtml" />
+    <Content Include="Views\BookersEn\Create.cshtml" />
+    <Content Include="Views\BookersEn\Delete.cshtml" />
+    <Content Include="Views\BookersEn\Details.cshtml" />
+    <Content Include="Views\BookersEn\Edit.cshtml" />
+    <Content Include="Views\BookersEn\Index.cshtml" />
+    <Content Include="Views\SeatsEn\Booked.cshtml" />
+    <Content Include="Views\SeatsEn\BookedRestricted.cshtml" />
+    <Content Include="Views\SeatsEn\Create.cshtml" />
+    <Content Include="Views\SeatsEn\Delete.cshtml" />
+    <Content Include="Views\SeatsEn\Details.cshtml" />
+    <Content Include="Views\SeatsEn\Edit.cshtml" />
+    <Content Include="Views\SeatsEn\Index.cshtml" />
+    <Content Include="Views\SeatsEn\Plan.cshtml" />
+    <Content Include="Views\SeatsEn\PlanRestricted.cshtml" />
+    <Content Include="Views\Home\IndexEn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603041914146_added face and party.resx">
       <DependentUpon>201603041914146_added face and party.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604301737317_English.resx">
+      <DependentUpon>201604301737317_English.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

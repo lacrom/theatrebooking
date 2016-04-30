@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Booking";
+}
+
+<div class="jumbotron">
+    @Html.ActionLink("Go to Russian", "Index", "Home", null, new { @class = "btn btn-default" })
+    <h1>Menu</h1>
+    <p>
+        @Html.ActionLink("Book seats", "Plan", "SeatsEn", null, new {@class = "btn btn-primary"})
+    </p>
+    <p>
+        @Html.ActionLink("Booked seats", "Booked", "SeatsEn", null, new {@class = "btn btn-primary"})
+    </p>
+    <p>
+    @Html.ActionLink("Bookers and seats", "BookerAndSeats", "BookersEn", null, new {@class = "btn btn-primary"})
+    <hr/>
+    <h3>
+        View-only
+    </h3>
+    <p>
+        @Html.ActionLink("Hall plan", "PlanRestricted", "SeatsEn", null, new {@class = "btn btn-default"})
+    </p>
+    <p>
+        @Html.ActionLink("Booked seats", "BookedRestricted", "SeatsEn", null, new {@class = "btn btn-default"})
+    </p>
+    <p>@Html.ActionLink("Bookers and seats", "BookerAndSeatsRestricted", "BookersEn", null, new {@class = "btn btn-default"})</p>
+</div>

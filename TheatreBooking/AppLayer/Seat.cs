@@ -24,5 +24,14 @@ namespace TheatreBooking.AppLayer
         public DateTime? BookedAt { get; set; }
         public DateTime? SelectedAt { get; set; }
         public virtual Booker BookedBy { get; set; }
+
+        [DisplayName("Тип")]
+        public string RowNameEn { get; set; }
+
+        [DisplayName("Область")]
+        public string AreaDescriptionEn { get; set; }
+
+        [DisplayName("Информация")]
+        public string InformationEn { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TheatreBooking.AppLayer.Seat>
+
+@{
+    ViewBag.Title = "Booked seats";
+}
+
+<h2>Booked seats <span style="float:right">@Html.ActionLink("Download list", "ExportBookedSeatsToExcel")</span></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Row Name
+        </th>
+        <th>
+            Row Number
+        </th>
+        <th>
+            Seat Number
+        </th>
+        <th>
+            Area Description
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Booked at
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RowNameEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RowNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeatNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaDescriptionEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookedBy.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookedBy.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookedBy.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookedBy.PhoneNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Unbook", "Unbook", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

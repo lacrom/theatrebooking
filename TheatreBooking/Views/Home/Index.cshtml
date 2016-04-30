@@ -3,24 +3,25 @@
 }
 
 <div class="jumbotron">
-    <h1>Menu</h1>
+    @Html.ActionLink("Go to English", "IndexEn", "Home", null, new { @class = "btn btn-default" })
+    <h1>Меню</h1>
     <p>
-        @Html.ActionLink("Забронировать", "Plan", "Seats", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Забронировать", "Plan", "Seats", null, new {@class = "btn btn-primary"})
     </p>
     <p>
-        @Html.ActionLink("Список забронированных мест", "Booked", "Seats", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Список забронированных мест", "Booked", "Seats", null, new {@class = "btn btn-primary"})
     </p>
     <p>
-        @Html.ActionLink("Список забронировавших персон и их места", "BookerAndSeats", "Bookers", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Список забронировавших персон и их места", "BookerAndSeats", "Bookers", null, new {@class = "btn btn-primary"})
     <hr/>
     <h3>
-       Без права редактирования 
+        Без права редактирования
     </h3>
     <p>
-        @Html.ActionLink("План зала", "PlanRestricted", "Seats", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("План зала", "PlanRestricted", "Seats", null, new {@class = "btn btn-default"})
     </p>
     <p>
-        @Html.ActionLink("Список забронированных мест", "BookedRestricted", "Seats", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Список забронированных мест", "BookedRestricted", "Seats", null, new {@class = "btn btn-default"})
     </p>
-    <p>@Html.ActionLink("Список забронировавших персон и их места", "BookerAndSeatsRestricted", "Bookers", null, new { @class = "btn btn-default" })</p>
+    <p>@Html.ActionLink("Список забронировавших персон и их места", "BookerAndSeatsRestricted", "Bookers", null, new {@class = "btn btn-default"})</p>
 </div>

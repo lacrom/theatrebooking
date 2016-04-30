@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TheatreBooking.AppLayer.BookerAndSeats>
+
+@{
+    ViewBag.Title = "Booked seats";
+}
+<h2>Booked seats <span style="float:right">@Html.ActionLink("Download list", "ExportBookersToExcel")</span></h2>
+<table class="table">
+    <tr>
+        <th>
+            Last Name
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Seats
+        </th>
+        <th>
+            Inviting company
+        </th>
+        <th>
+            After Party
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @foreach (var seat in item.Seats)
+            {
+                <p>
+                    @Html.DisplayFor(modelItem => seat)
+                </p>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Face)
+        </td>
+        <td>
+            @{
+                var party = (item.Party ?? false) ? "After party" : "";
+            }
+            @Html.DisplayFor(modelItem => party)
+        </td>
+    </tr>
+}
+
+</table>
