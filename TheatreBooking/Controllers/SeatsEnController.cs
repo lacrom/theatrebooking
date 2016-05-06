@@ -66,7 +66,7 @@ namespace TheatreBooking.Controllers
         {
             var seats = new System.Data.DataTable("bookers");
             seats.Columns.Add("Area", typeof(string));
-            seats.Columns.Add("Seat", typeof(string));
+            seats.Columns.Add("Name", typeof(string));
             seats.Columns.Add("Number", typeof(string));
             seats.Columns.Add("Seat", typeof(string));
             seats.Columns.Add("Price", typeof(string));
